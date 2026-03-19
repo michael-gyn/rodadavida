@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="appTitle">Roda da Vida - Zig Ziglar</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9829082566550815"
-     crossorigin="anonymous"></script>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9829082566550815" crossorigin="anonymous"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <style>
         * {
@@ -78,15 +79,11 @@
 
         .ad-banner-top {
             width: 100%;
-            height: 90px; /* Standard banner size */
-            background-color: #f0f0f0;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
-            color: #666;
-            font-size: 0.9em;
-            border: 1px dashed #ccc;
         }
 
         .content {
@@ -94,6 +91,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             padding: 40px;
+            align-items: start; /* Corrige o esticamento das colunas */
         }
 
         .form-section {
@@ -320,64 +318,23 @@
             color: #667eea;
         }
 
-        .no-data {
-            text-align: center;
-            color: #999;
-            padding: 40px 20px;
-            font-size: 1.1em;
-        }
-
         .ad-native {
             width: 100%;
-            height: 150px; /* Example size for native ad */
-            background-color: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
-            color: #666;
-            font-size: 0.9em;
-            border: 1px dashed #ccc;
         }
 
-        .ad-rewarded-video-container {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .btn-rewarded {
-            background: #ff9800;
-            color: white;
-            padding: 12px 25px;
-            font-size: 1em;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
-        }
-
-        .btn-rewarded:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.6);
-        }
-
-        @media (max-width: 1024px) {
+        /* Reduzido de 1024px para 768px para manter lado a lado em tablets */
+        @media (max-width: 768px) {
             .content {
                 grid-template-columns: 1fr;
+                padding: 20px;
             }
 
             .header h1 {
                 font-size: 2em;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 20px;
             }
 
             .area-group {
@@ -397,13 +354,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        .scroll-to-results {
-            margin-top: 30px;
-            text-align: center;
-            color: #667eea;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
@@ -418,228 +368,104 @@
             </div>
             <h1 id="headerTitle">🎯 Roda da Vida - Zig Ziglar</h1>
             <p id="headerDescription">Avalie seu equilíbrio de vida e descubra oportunidades de crescimento</p>
+            
             <div class="ad-banner-top">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9829082566550815"
-         data-ad-slot="6564667329"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9829082566550815"
+                     data-ad-slot="6564667329"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
         </div>
 
         <div class="content">
-            <!-- Formulário de Avaliação -->
+            
             <div class="form-section">
+                
                 <div class="area-group">
-                    <div class="area-title">
-                        <span class="area-icon">🧠</span>
-                        <span data-translate="area_mental">Mental</span>
-                    </div>
+                    <div class="area-title"><span class="area-icon">🧠</span><span data-translate="area_mental">Mental</span></div>
                     <div class="sub-items">
-                        <div class="sub-item">
-                            <label data-translate="mental_attitude">Atitude</label>
-                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="mental_intelligence">Inteligência</label>
-                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="mental_formal_education">Educação Formal</label>
-                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="mental_continuous_education">Educação Continuada</label>
-                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="mental_creativity">Criatividade</label>
-                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
-                        </div>
+                        <div class="sub-item"><label data-translate="mental_attitude">Atitude</label><input type="number" class="mental" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="mental_intelligence">Inteligência</label><input type="number" class="mental" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="mental_formal_education">Educação Formal</label><input type="number" class="mental" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="mental_continuous_education">Educação Continuada</label><input type="number" class="mental" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="mental_creativity">Criatividade</label><input type="number" class="mental" min="1" max="10" placeholder="1-10"></div>
                         <div class="area-total"><span data-translate="average_prefix">Média</span> <span data-translate="area_mental">Mental</span>: <span class="mental-avg">0</span>/10</div>
                     </div>
                 </div>
 
                 <div class="area-group">
-                    <div class="area-title">
-                        <span class="area-icon">💪</span>
-                        <span data-translate="area_physical">Física</span>
-                    </div>
+                    <div class="area-title"><span class="area-icon">💪</span><span data-translate="area_physical">Física</span></div>
                     <div class="sub-items">
-                        <div class="sub-item">
-                            <label data-translate="physical_appearance">Aparência</label>
-                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="physical_regular_checkup">Check-up Regular</label>
-                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="physical_energy_level">Nível de Energia</label>
-                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="physical_regular_exercise">Exercício Regular</label>
-                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="physical_nutrition">Nutrição</label>
-                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
-                        </div>
+                        <div class="sub-item"><label data-translate="physical_appearance">Aparência</label><input type="number" class="fisica" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="physical_regular_checkup">Check-up Regular</label><input type="number" class="fisica" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="physical_energy_level">Nível de Energia</label><input type="number" class="fisica" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="physical_regular_exercise">Exercício Regular</label><input type="number" class="fisica" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="physical_nutrition">Nutrição</label><input type="number" class="fisica" min="1" max="10" placeholder="1-10"></div>
                         <div class="area-total"><span data-translate="average_prefix">Média</span> <span data-translate="area_physical">Física</span>: <span class="fisica-avg">0</span>/10</div>
                     </div>
                 </div>
 
                 <div class="area-group">
-                    <div class="area-title">
-                        <span class="area-icon">✨</span>
-                        <span data-translate="area_spiritual">Espiritual</span>
-                    </div>
+                    <div class="area-title"><span class="area-icon">✨</span><span data-translate="area_spiritual">Espiritual</span></div>
                     <div class="sub-items">
-                        <div class="sub-item">
-                            <label data-translate="spiritual_belief">Crença/Fé</label>
-                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="spiritual_inner_peace">Paz Interior</label>
-                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="spiritual_positive_influence">Influência Positiva</label>
-                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="spiritual_sense_of_purpose">Senso de Propósito</label>
-                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="spiritual_gratitude">Gratidão</label>
-                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
-                        </div>
+                        <div class="sub-item"><label data-translate="spiritual_belief">Crença/Fé</label><input type="number" class="espiritual" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="spiritual_inner_peace">Paz Interior</label><input type="number" class="espiritual" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="spiritual_positive_influence">Influência Positiva</label><input type="number" class="espiritual" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="spiritual_sense_of_purpose">Senso de Propósito</label><input type="number" class="espiritual" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="spiritual_gratitude">Gratidão</label><input type="number" class="espiritual" min="1" max="10" placeholder="1-10"></div>
                         <div class="area-total"><span data-translate="average_prefix">Média</span> <span data-translate="area_spiritual">Espiritual</span>: <span class="espiritual-avg">0</span>/10</div>
                     </div>
                 </div>
 
                 <div class="area-group">
-                    <div class="area-title">
-                        <span class="area-icon">👨‍👩‍👧‍👦</span>
-                        <span data-translate="area_family">Família</span>
-                    </div>
+                    <div class="area-title"><span class="area-icon">👨‍👩‍👧‍👦</span><span data-translate="area_family">Família</span></div>
                     <div class="sub-items">
-                        <div class="sub-item">
-                            <label data-translate="family_active_listening">Escuta Ativa</label>
-                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="family_good_role_model">Ser um Bom Modelo</label>
-                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="family_flexibility">Flexibilidade</label>
-                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="family_forgiveness">Perdão</label>
-                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="family_quality_time">Tempo de Qualidade</label>
-                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
-                        </div>
+                        <div class="sub-item"><label data-translate="family_active_listening">Escuta Ativa</label><input type="number" class="familia" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="family_good_role_model">Ser um Bom Modelo</label><input type="number" class="familia" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="family_flexibility">Flexibilidade</label><input type="number" class="familia" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="family_forgiveness">Perdão</label><input type="number" class="familia" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="family_quality_time">Tempo de Qualidade</label><input type="number" class="familia" min="1" max="10" placeholder="1-10"></div>
                         <div class="area-total"><span data-translate="average_prefix">Média</span> <span data-translate="area_family">Família</span>: <span class="familia-avg">0</span>/10</div>
                     </div>
                 </div>
 
                 <div class="area-group">
-                    <div class="area-title">
-                        <span class="area-icon">💰</span>
-                        <span data-translate="area_financial">Financeira</span>
-                    </div>
+                    <div class="area-title"><span class="area-icon">💰</span><span data-translate="area_financial">Financeira</span></div>
                     <div class="sub-items">
-                        <div class="sub-item">
-                            <label data-translate="financial_correct_priorities">Prioridades Corretas</label>
-                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="financial_personal_budget">Orçamento Pessoal</label>
-                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="financial_spending_control">Controle de Gastos</label>
-                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="financial_savings">Poupança/Reserva</label>
-                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="financial_investments">Investimentos</label>
-                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
-                        </div>
+                        <div class="sub-item"><label data-translate="financial_correct_priorities">Prioridades Corretas</label><input type="number" class="financeira" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="financial_personal_budget">Orçamento Pessoal</label><input type="number" class="financeira" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="financial_spending_control">Controle de Gastos</label><input type="number" class="financeira" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="financial_savings">Poupança/Reserva</label><input type="number" class="financeira" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="financial_investments">Investimentos</label><input type="number" class="financeira" min="1" max="10" placeholder="1-10"></div>
                         <div class="area-total"><span data-translate="average_prefix">Média</span> <span data-translate="area_financial">Financeira</span>: <span class="financeira-avg">0</span>/10</div>
                     </div>
                 </div>
 
                 <div class="area-group">
-                    <div class="area-title">
-                        <span class="area-icon">🎨</span>
-                        <span data-translate="area_personal">Pessoal</span>
-                    </div>
+                    <div class="area-title"><span class="area-icon">🎨</span><span data-translate="area_personal">Pessoal</span></div>
                     <div class="sub-items">
-                        <div class="sub-item">
-                            <label data-translate="personal_recreation">Recreação/Lazer</label>
-                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="personal_friendships">Amizades</label>
-                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="personal_community_activities">Atividades Comunitárias</label>
-                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="personal_growth_time">Tempo de Crescimento</label>
-                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="personal_time_management">Gestão do Tempo</label>
-                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
-                        </div>
+                        <div class="sub-item"><label data-translate="personal_recreation">Recreação/Lazer</label><input type="number" class="pessoal" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="personal_friendships">Amizades</label><input type="number" class="pessoal" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="personal_community_activities">Atividades Comunitárias</label><input type="number" class="pessoal" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="personal_growth_time">Tempo de Crescimento</label><input type="number" class="pessoal" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="personal_time_management">Gestão do Tempo</label><input type="number" class="pessoal" min="1" max="10" placeholder="1-10"></div>
                         <div class="area-total"><span data-translate="average_prefix">Média</span> <span data-translate="area_personal">Pessoal</span>: <span class="pessoal-avg">0</span>/10</div>
                     </div>
                 </div>
 
                 <div class="area-group">
-                    <div class="area-title">
-                        <span class="area-icon">🚀</span>
-                        <span data-translate="area_career">Carreira</span>
-                    </div>
+                    <div class="area-title"><span class="area-icon">🚀</span><span data-translate="area_career">Carreira</span></div>
                     <div class="sub-items">
-                        <div class="sub-item">
-                            <label data-translate="career_passion">Paixão pelo Trabalho</label>
-                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="career_professional_relationships">Relacionamentos Profissionais</label>
-                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="career_productivity">Produtividade</label>
-                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="career_objective_alignment">Alinhamento com Objetivos</label>
-                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
-                        </div>
-                        <div class="sub-item">
-                            <label data-translate="career_advancement_opportunity">Oportunidade de Avanço</label>
-                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
-                        </div>
+                        <div class="sub-item"><label data-translate="career_passion">Paixão pelo Trabalho</label><input type="number" class="carreira" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="career_professional_relationships">Relacionamentos Profissionais</label><input type="number" class="carreira" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="career_productivity">Produtividade</label><input type="number" class="carreira" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="career_objective_alignment">Alinhamento com Objetivos</label><input type="number" class="carreira" min="1" max="10" placeholder="1-10"></div>
+                        <div class="sub-item"><label data-translate="career_advancement_opportunity">Oportunidade de Avanço</label><input type="number" class="carreira" min="1" max="10" placeholder="1-10"></div>
                         <div class="area-total"><span data-translate="average_prefix">Média</span> <span data-translate="area_career">Carreira</span>: <span class="carreira-avg">0</span>/10</div>
                     </div>
                 </div>
@@ -649,35 +475,37 @@
                     <button class="btn btn-secondary" onclick="limparFormulario()" data-translate="clear_button">🔄 Limpar</button>
                 </div>
 
-           <div class="ad-rewarded-video-container" style="display: none;">
-            </div>
-
-            <!-- Seção de Gráfico e Insights -->
+            </div> 
             <div class="chart-section">
+                
                 <div class="summary-stats" id="summaryStats"></div>
+                
                 <div class="chart-container" id="chartContainer">
                     <div class="chart-wrapper">
                         <canvas id="radarChart"></canvas>
                     </div>
                 </div>
+                
                 <div class="insights-section" id="insightsSection">
                     <div class="insights-title" data-translate="insights_title">📈 Análise e Plano de Ação</div>
+                    
                     <div id="insightsContent"></div>
-                    <div id="insightsContent"></div>
-                        <div class="ad-native">
-                            <ins class="adsbygoogle"
-                                 style="display:block; text-align:center;"
-                                 data-ad-layout="in-article"
-                                 data-ad-format="fluid"
-                                 data-ad-client="ca-pub-9829082566550815"
-                                 data-ad-slot="3938503988"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </div>
+                    
+                    <div class="ad-native">
+                        <ins class="adsbygoogle"
+                             style="display:block; text-align:center;"
+                             data-ad-layout="in-article"
+                             data-ad-format="fluid"
+                             data-ad-client="ca-pub-9829082566550815"
+                             data-ad-slot="3938503988"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
                 </div>
+                
             </div>
-        </div>
+            </div>
     </div>
 
     <script>
@@ -685,7 +513,6 @@
         let translations = {};
         let currentLang = localStorage.getItem('lang') || 'pt';
 
-        // Load translations
         fetch('translations.json')
             .then(response => response.json())
             .then(data => {
@@ -699,12 +526,10 @@
             localStorage.setItem('lang', lang);
             document.getElementById('languageSelect').value = lang;
 
-            // Update static texts
             document.getElementById('appTitle').textContent = translations[lang].app_title;
             document.getElementById('headerTitle').textContent = translations[lang].app_title;
             document.getElementById('headerDescription').textContent = translations[lang].app_description;
 
-            // Update elements with data-translate attribute
             document.querySelectorAll('[data-translate]').forEach(element => {
                 const key = element.getAttribute('data-translate');
                 if (translations[lang][key]) {
@@ -712,15 +537,11 @@
                 }
             });
 
-            // Update button texts
             document.querySelector('.btn-primary').textContent = translations[lang].generate_evaluation_button;
             document.querySelector('.btn-secondary').textContent = translations[lang].clear_button;
-            document.querySelector('.btn-rewarded').textContent = translations[lang].rewarded_ad_button || 'Assista a um Anúncio para Dicas Bônus!'; // Fallback
 
-            // Update dynamic texts like averages
             atualizarMedias();
 
-            // Re-render chart if active
             if (document.getElementById('chartContainer').classList.contains('active')) {
                 gerarAvaliacao();
             }
@@ -930,16 +751,8 @@
             }
         }
 
-        function showRewardedVideo() {
-            alert('Simulando Anúncio de Vídeo Premiado. Após assistir, você receberia dicas bônus!');
-            // Aqui você integraria o SDK do seu provedor de anúncios (AdMob, etc.)
-            // Exemplo: adMob.showRewardedVideo();
-        }
-
-        // Inicializar médias e idioma ao carregar
         window.addEventListener('load', () => {
             atualizarMedias();
-            // setLanguage(currentLang) is called after translations are loaded
         });
     </script>
 </body>
