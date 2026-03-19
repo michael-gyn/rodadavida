@@ -86,19 +86,32 @@
             margin-top: 20px;
         }
 
+        /* ===== MUDANÇA PRINCIPAL: FLEXBOX ===== */
         .content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            display: flex;
+            flex-wrap: wrap; /* Permite quebrar linha SÓ em telas pequenas */
+            gap: 40px;
             padding: 40px;
-            align-items: start; /* Corrige o esticamento das colunas */
+            align-items: flex-start;
         }
 
         .form-section {
+            flex: 1 1 45%; /* Pega 45% do espaço */
+            min-width: 350px; /* Impede de ficar muito fino */
             display: flex;
             flex-direction: column;
             gap: 25px;
         }
+
+        .chart-section {
+            flex: 1 1 45%; /* Pega os outros 45% do espaço */
+            min-width: 350px; /* Impede de ficar muito fino */
+            max-width: 100%; /* Trava o gráfico para não estourar a tela */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        /* ======================================= */
 
         .area-group {
             background: #f8f9fa;
@@ -208,12 +221,6 @@
             background: #d0d0d0;
         }
 
-        .chart-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
         .chart-container {
             background: #f8f9fa;
             padding: 20px;
@@ -221,6 +228,7 @@
             position: relative;
             height: 400px;
             display: none;
+            width: 100%;
         }
 
         .chart-container.active {
@@ -230,6 +238,7 @@
         .chart-wrapper {
             position: relative;
             height: 100%;
+            width: 100%;
         }
 
         .insights-section {
@@ -326,10 +335,8 @@
             margin-top: 20px;
         }
 
-        /* Reduzido de 1024px para 768px para manter lado a lado em tablets */
         @media (max-width: 768px) {
             .content {
-                grid-template-columns: 1fr;
                 padding: 20px;
             }
 
