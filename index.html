@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roda da Vida - Zig Ziglar</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .area-group {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .area-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .area-icon {
+            font-size: 1.5em;
+        }
+
+        .sub-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sub-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sub-item label {
+            flex: 1;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .sub-item input[type="number"] {
+            width: 70px;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95em;
+            font-weight: 600;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .sub-item input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .area-total {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid #ddd;
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.05em;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px 30px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .chart-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .chart-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            height: 400px;
+            display: none;
+        }
+
+        .chart-container.active {
+            display: block;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 100%;
+        }
+
+        .insights-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .insights-section.active {
+            display: block;
+        }
+
+        .insights-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .insight-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .insight-area {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .insight-score {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .insight-text {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .action-plan {
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            color: #2e7d32;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .area-group {
+                padding: 15px;
+            }
+
+            .sub-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .sub-item input[type="number"] {
+                width: 100%;
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-to-results {
+            margin-top: 30px;
+            text-align: center;
+            color: #667eea;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Roda da Vida - Zig Ziglar</h1>
+            <p>Avalie seu equilíbrio de vida e descubra oportunidades de crescimento</p>
+        </div>
+
+        <div class="content">
+            <!-- Formulário de Avaliação -->
+            <div class="form-section">
+                <div class="area-group">
+                    <div class="area-title">
+                        <span class="area-icon">🧠</span>
+                        Mental
+                    </div>
+                    <div class="sub-items">
+                        <div class="sub-item">
+                            <label>Atitude</label>
+                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Inteligência</label>
+                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Educação Formal</label>
+                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Educação Continuada</label>
+                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Criatividade</label>
+                            <input type="number" class="mental" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="area-total">Média Mental: <span class="mental-avg">0</span>/10</div>
+                    </div>
+                </div>
+
+                <div class="area-group">
+                    <div class="area-title">
+                        <span class="area-icon">💪</span>
+                        Física
+                    </div>
+                    <div class="sub-items">
+                        <div class="sub-item">
+                            <label>Aparência</label>
+                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Check-up Regular</label>
+                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Nível de Energia</label>
+                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Exercício Regular</label>
+                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Nutrição</label>
+                            <input type="number" class="fisica" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="area-total">Média Física: <span class="fisica-avg">0</span>/10</div>
+                    </div>
+                </div>
+
+                <div class="area-group">
+                    <div class="area-title">
+                        <span class="area-icon">✨</span>
+                        Espiritual
+                    </div>
+                    <div class="sub-items">
+                        <div class="sub-item">
+                            <label>Crença/Fé</label>
+                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Paz Interior</label>
+                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Influência Positiva</label>
+                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Senso de Propósito</label>
+                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Gratidão</label>
+                            <input type="number" class="espiritual" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="area-total">Média Espiritual: <span class="espiritual-avg">0</span>/10</div>
+                    </div>
+                </div>
+
+                <div class="area-group">
+                    <div class="area-title">
+                        <span class="area-icon">👨‍👩‍👧‍👦</span>
+                        Família
+                    </div>
+                    <div class="sub-items">
+                        <div class="sub-item">
+                            <label>Escuta Ativa</label>
+                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Ser um Bom Modelo</label>
+                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Flexibilidade</label>
+                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Perdão</label>
+                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Tempo de Qualidade</label>
+                            <input type="number" class="familia" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="area-total">Média Família: <span class="familia-avg">0</span>/10</div>
+                    </div>
+                </div>
+
+                <div class="area-group">
+                    <div class="area-title">
+                        <span class="area-icon">💰</span>
+                        Financeira
+                    </div>
+                    <div class="sub-items">
+                        <div class="sub-item">
+                            <label>Prioridades Corretas</label>
+                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Orçamento Pessoal</label>
+                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Controle de Gastos</label>
+                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Poupança/Reserva</label>
+                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Investimentos</label>
+                            <input type="number" class="financeira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="area-total">Média Financeira: <span class="financeira-avg">0</span>/10</div>
+                    </div>
+                </div>
+
+                <div class="area-group">
+                    <div class="area-title">
+                        <span class="area-icon">🎨</span>
+                        Pessoal
+                    </div>
+                    <div class="sub-items">
+                        <div class="sub-item">
+                            <label>Recreação/Lazer</label>
+                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Amizades</label>
+                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Atividades Comunitárias</label>
+                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Tempo de Crescimento</label>
+                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Gestão do Tempo</label>
+                            <input type="number" class="pessoal" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="area-total">Média Pessoal: <span class="pessoal-avg">0</span>/10</div>
+                    </div>
+                </div>
+
+                <div class="area-group">
+                    <div class="area-title">
+                        <span class="area-icon">🚀</span>
+                        Carreira
+                    </div>
+                    <div class="sub-items">
+                        <div class="sub-item">
+                            <label>Paixão pelo Trabalho</label>
+                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Relacionamentos Profissionais</label>
+                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Produtividade</label>
+                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Alinhamento com Objetivos</label>
+                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="sub-item">
+                            <label>Oportunidade de Avanço</label>
+                            <input type="number" class="carreira" min="1" max="10" placeholder="1-10">
+                        </div>
+                        <div class="area-total">Média Carreira: <span class="carreira-avg">0</span>/10</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="gerarAvaliacao()">📊 Gerar Avaliação</button>
+                    <button class="btn btn-secondary" onclick="limparFormulario()">🔄 Limpar</button>
+                </div>
+            </div>
+
+            <!-- Seção de Gráfico e Insights -->
+            <div class="chart-section">
+                <div class="summary-stats" id="summaryStats"></div>
+                <div class="chart-container" id="chartContainer">
+                    <div class="chart-wrapper">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+                <div class="insights-section" id="insightsSection">
+                    <div class="insights-title">📈 Análise e Plano de Ação</div>
+                    <div id="insightsContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let radarChartInstance = null;
+
+        function calcularMedia(classe) {
+            const inputs = document.querySelectorAll(`.${classe}`);
+            let soma = 0;
+            let count = 0;
+            inputs.forEach(input => {
+                const valor = parseFloat(input.value) || 0;
+                if (valor > 0) {
+                    soma += valor;
+                    count++;
+                }
+            });
+            return count > 0 ? (soma / count).toFixed(1) : 0;
+        }
+
+        function atualizarMedias() {
+            const areas = ['mental', 'fisica', 'espiritual', 'familia', 'financeira', 'pessoal', 'carreira'];
+            areas.forEach(area => {
+                const media = calcularMedia(area);
+                document.querySelector(`.${area}-avg`).textContent = media;
+            });
+        }
+
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('input[type="number"]')) {
+                atualizarMedias();
+            }
+        });
+
+        function gerarAvaliacao() {
+            const areas = ['Mental', 'Física', 'Espiritual', 'Família', 'Financeira', 'Pessoal', 'Carreira'];
+            const classes = ['mental', 'fisica', 'espiritual', 'familia', 'financeira', 'pessoal', 'carreira'];
+            const dados = [];
+            const medias = [];
+
+            classes.forEach(classe => {
+                const media = parseFloat(calcularMedia(classe));
+                medias.push(media);
+                dados.push(media);
+            });
+
+            // Validar se há dados
+            if (dados.every(d => d === 0)) {
+                alert('Por favor, preencha pelo menos uma avaliação antes de gerar o relatório.');
+                return;
+            }
+
+            // Gerar gráfico de radar
+            gerarGraficoRadar(areas, dados);
+
+            // Gerar insights
+            gerarInsights(areas, medias);
+
+            // Gerar estatísticas resumidas
+            gerarEstatisticas(areas, medias);
+
+            // Mostrar seções
+            document.getElementById('chartContainer').classList.add('active');
+            document.getElementById('insightsSection').classList.add('active');
+
+            // Scroll para resultados
+            setTimeout(() => {
+                document.getElementById('chartContainer').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function gerarGraficoRadar(labels, dados) {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+
+            if (radarChartInstance) {
+                radarChartInstance.destroy();
+            }
+
+            radarChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sua Avaliação',
+                        data: dados,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#667eea',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: { size: 14, weight: 'bold' },
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 13 },
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Nota: ' + context.parsed.r.toFixed(1) + '/10';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            min: 0,
+                            ticks: {
+                                stepSize: 2,
+                                font: { size: 12 },
+                                backdropColor: 'transparent'
+                            },
+                            grid: {
+                                color: 'rgba(102, 126, 234, 0.1)',
+                                drawBorder: true
+                            },
+                            pointLabels: {
+                                font: { size: 13, weight: 'bold' },
+                                color: '#667eea'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function gerarInsights(areas, medias) {
+            const insights = {
+                'Mental': {
+                    baixo: 'Sua vida mental precisa de mais atenção. Considere dedicar tempo para leitura, cursos e desenvolvimento intelectual.',
+                    medio: 'Sua vida mental está em desenvolvimento. Continue investindo em educação e crescimento intelectual.',
+                    alto: 'Excelente! Sua vida mental está bem desenvolvida. Mantenha o hábito de aprendizado contínuo.'
+                },
+                'Física': {
+                    baixo: 'Sua saúde física requer atenção urgente. Comece com pequenos passos: exercícios regulares, boa alimentação e check-ups médicos.',
+                    medio: 'Sua saúde física está razoável. Aumente a intensidade dos exercícios e melhore seus hábitos alimentares.',
+                    alto: 'Parabéns! Sua saúde física está excelente. Continue mantendo seus hábitos saudáveis.'
+                },
+                'Espiritual': {
+                    baixo: 'Sua vida espiritual necessita de atenção. Reserve tempo para reflexão, meditação ou práticas espirituais que ressoem com você.',
+                    medio: 'Sua vida espiritual está em desenvolvimento. Aprofunde sua conexão com seus valores e propósito de vida.',
+                    alto: 'Excelente! Sua vida espiritual está bem alinhada. Continue cultivando paz interior e propósito.'
+                },
+                'Família': {
+                    baixo: 'Seus relacionamentos familiares precisam de investimento. Dedique tempo de qualidade e melhore a comunicação.',
+                    medio: 'Seus relacionamentos familiares estão bons. Intensifique a qualidade do tempo passado com seus entes queridos.',
+                    alto: 'Parabéns! Seus relacionamentos familiares são fortes. Continue cultivando esse vínculo precioso.'
+                },
+                'Financeira': {
+                    baixo: 'Sua situação financeira requer planejamento urgente. Crie um orçamento, controle gastos e comece a poupar.',
+                    medio: 'Sua situação financeira está estável. Trabalhe em investimentos e aumente sua reserva de emergência.',
+                    alto: 'Excelente! Sua saúde financeira está sólida. Continue investindo e planejando para o futuro.'
+                },
+                'Pessoal': {
+                    baixo: 'Sua vida pessoal precisa de mais equilíbrio. Reserve tempo para lazer, amigos e desenvolvimento pessoal.',
+                    medio: 'Sua vida pessoal está equilibrada. Busque novas experiências e aprofunde suas amizades.',
+                    alto: 'Parabéns! Sua vida pessoal está bem equilibrada. Continue desfrutando de momentos de qualidade.'
+                },
+                'Carreira': {
+                    baixo: 'Sua carreira precisa de direcionamento. Defina objetivos claros e trabalhe em seu desenvolvimento profissional.',
+                    medio: 'Sua carreira está em bom caminho. Busque oportunidades de crescimento e aprimoramento profissional.',
+                    alto: 'Excelente! Sua carreira está em ótima forma. Continue perseguindo seus objetivos profissionais.'
+                }
+            };
+
+            const actionPlans = {
+                'Mental': 'Ação: Leia 30 minutos por dia, faça um curso online, participe de discussões intelectuais.',
+                'Física': 'Ação: Exercite-se 30 minutos, 5 dias por semana. Melhore sua alimentação. Agende check-up médico.',
+                'Espiritual': 'Ação: Medite 10 minutos diariamente, reflita sobre seus valores, pratique gratidão.',
+                'Família': 'Ação: Dedique 1 hora por dia para sua família, melhore a comunicação, expresse amor e respeito.',
+                'Financeira': 'Ação: Crie um orçamento mensal, economize 10% da renda, revise seus investimentos.',
+                'Pessoal': 'Ação: Reserve 2 horas por semana para lazer, cultive amizades, invista em hobbies.',
+                'Carreira': 'Ação: Defina objetivos de carreira, busque mentoria, desenvolva novas habilidades.'
+            };
+
+            let html = '';
+
+            areas.forEach((area, index) => {
+                const media = medias[index];
+                let nivel = media < 4 ? 'baixo' : media < 7 ? 'medio' : 'alto';
+                const insight = insights[area][nivel];
+                const actionPlan = actionPlans[area];
+
+                html += `
+                    <div class="insight-item">
+                        <div class="insight-area">
+                            ${area}
+                            <span class="insight-score">${media.toFixed(1)}/10</span>
+                        </div>
+                        <div class="insight-text">${insight}</div>
+                        <div class="action-plan">${actionPlan}</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('insightsContent').innerHTML = html;
+        }
+
+        function gerarEstatisticas(areas, medias) {
+            const media_geral = (medias.reduce((a, b) => a + b, 0) / medias.length).toFixed(1);
+            const area_melhor = areas[medias.indexOf(Math.max(...medias))];
+            const area_pior = areas[medias.indexOf(Math.min(...medias))];
+            const areas_baixas = areas.filter((a, i) => medias[i] < 4).length;
+
+            let html = `
+                <div class="stat-card">
+                    <div class="stat-label">Média Geral</div>
+                    <div class="stat-value">${media_geral}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Melhor Área</div>
+                    <div class="stat-value">${area_melhor}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Área para Melhorar</div>
+                    <div class="stat-value">${area_pior}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Áreas Críticas</div>
+                    <div class="stat-value">${areas_baixas}</div>
+                </div>
+            `;
+
+            document.getElementById('summaryStats').innerHTML = html;
+        }
+
+        function limparFormulario() {
+            if (confirm('Tem certeza que deseja limpar todas as avaliações?')) {
+                document.querySelectorAll('input[type="number"]').forEach(input => {
+                    input.value = '';
+                });
+                document.getElementById('chartContainer').classList.remove('active');
+                document.getElementById('insightsSection').classList.remove('active');
+                document.getElementById('summaryStats').innerHTML = '';
+                atualizarMedias();
+            }
+        }
+
+        // Inicializar médias ao carregar
+        window.addEventListener('load', atualizarMedias);
+    </script>
+</body>
+</html>
